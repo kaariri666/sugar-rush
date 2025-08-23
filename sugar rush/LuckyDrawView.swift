@@ -41,12 +41,14 @@ struct LuckyDrawView: View {
                 .fill(Color.black)
                 .frame(width: 20, height: 20)
                 .offset(y: -10)
-
+            
             if !winner.isEmpty {
-                Text("Winner: \(winner)")
+                Text("you won \(winner)!!")
                     .font(.title2)
-                    .foregroundColor(.green)
-                    .padding()
+                    .foregroundColor(.red)
+                Text("HURRAH!! HUZZAH!!")
+                    .font(.title2)
+                    .foregroundColor(.pink)
             }
 
             Button("SPIN") {
