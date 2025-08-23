@@ -11,12 +11,15 @@ struct LuckyDrawView: View {
     @State var rotation = 0.0
     @State var isSpinning = false
     @State var winner = ""
+    @State private var showPopup = false
 
     let prizes = ["nothing", "nothing", "nothing", "sugar"]
     let colors = [Color.pink, Color.purple, Color.teal, Color.orange]
 
     var body: some View {
+        
         VStack {
+            
             Text("spin it")
                 .font(.title)
                 .padding()
@@ -27,41 +30,74 @@ struct LuckyDrawView: View {
                         .fill(colors[i])
                     
                     Text(prizes[i])
-                        .font(.headline)
+                        .font(.title)
+                        .bold()
                         .foregroundColor(.white)
-                        .offset(y: -50)
+                        .offset(y: -115)
                         .rotationEffect(.degrees(Double(i) * 90 + 45))
                 }
             }
-            .frame(width: 200, height: 200)
+            .frame(width: 380, height: 380)
             .rotationEffect(.degrees(rotation))
             .animation(.easeOut(duration: 3), value: rotation)
             
             Triangle()
                 .fill(Color.black)
-                .frame(width: 20, height: 20)
-                .offset(y: -10)
-            
-            if !winner.isEmpty {
-                Text("you won \(winner)!!")
-                    .font(.title2)
-                    .foregroundColor(.red)
-                Text("HURRAH!! HUZZAH!!")
-                    .font(.title2)
-                    .foregroundColor(.pink)
-            }
+                .frame(width: 30, height: 25)
+                .offset(y: -275)
 
             Button("SPIN") {
                 spin()
             }
             .font(.title)
             .padding()
-            .background(Color.purple)
+            .frame(width: 120, height: 120)
+            .background(Color.blue)
             .foregroundColor(.white)
-            .cornerRadius(10)
+            .cornerRadius(70)
             .disabled(isSpinning)
+            .offset(x: 0, y: -285)
         }
         .padding()
+        .overlay(
+
+            Group {
+                if showPopup {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            showPopup = false
+                        }
+                    
+                    VStack(spacing: 20) {
+                        Text("yay")
+                            .font(.system(size: 60))
+                        
+                        Text("you got \(winner)!!")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                        
+                        Text("HURRAH!! HUZZAH!!")
+                            .font(.title2)
+                            .foregroundColor(.pink)
+                        
+                        Text("Tap to continue")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(30)
+                    .background(Color(.systemBackground))
+                    .cornerRadius(20)
+                    .shadow(radius: 10)
+                    .scaleEffect(showPopup ? 1.0 : 0.8)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showPopup)
+                    .onTapGesture {
+                        showPopup = false
+                    }
+                }
+            }
+        )
     }
 
     func spin() {
@@ -75,6 +111,7 @@ struct LuckyDrawView: View {
             isSpinning = false
             let winnerIndex = Int((rotation.truncatingRemainder(dividingBy: 360)) / 90)
             winner = prizes[3 - winnerIndex]
+            showPopup = true
         }
     }
 }
@@ -105,9 +142,9 @@ struct PieSlice: Shape {
 struct Triangle: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.move(to: CGPoint(x: rect.midX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
         path.closeSubpath()
         return path
     }
