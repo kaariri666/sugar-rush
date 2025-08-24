@@ -5,6 +5,7 @@
 //  Created by Julia Li on 16/8/25.
 //
 import SwiftUI
+
 struct Minigames_: View {
     @State private var showingFullScreen = false
     var body: some View {
@@ -24,7 +25,7 @@ struct Minigames_: View {
             .tint(.purple)
             .padding()
                 .fullScreenCover(isPresented: $showingFullScreen) {
-                    catchingSugar()
+                    CatchingSugarView()
                 }
             
             Button{
