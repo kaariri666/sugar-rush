@@ -161,7 +161,7 @@ struct CatchingSugarView: View {
         
         let missedSugars = sugars.filter { $0.y >= 700 }
         for _ in missedSugars {
-            score = max(0, score - 10)
+            score = max(0, score - 15)
         }
         
         sugars = sugars.filter { $0.y < 700 }
