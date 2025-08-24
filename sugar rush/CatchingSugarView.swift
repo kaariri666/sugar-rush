@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CatchingSugarView: View {
     @State var score = 0
-    @State var timeLeft = 300
+    @State var timeLeft = 120
     @State var gameOver = false
     @State var basketX = 200.0
     @State var sugars: [Sugar] = []
@@ -56,7 +56,7 @@ struct CatchingSugarView: View {
                     
                     ZStack {
                         ForEach(sugars) { sugar in
-                            Image(sugar.type == "brown" ? "brown sugar" : "sugar")
+                            Image(sugar.imageName)
                                 .resizable()
                                 .frame(width: 75, height: 75)
                                 .position(x: sugar.x, y: sugar.y)
@@ -141,13 +141,35 @@ struct CatchingSugarView: View {
     
     func spawnSugar() {
         let randomX = Double.random(in: 40...360)
-        let sugarType = Double.random(in: 0...1) < 0.05 ? "brown" : "normal"
-        let points = sugarType == "brown" ? 100 : 50
+        let randomChance = Double.random(in: 0...1)
+        
+        let itemType: String
+        let imageName: String
+        let points: Int
+        
+        if randomChance < 0.02 {
+            itemType = "fu"
+            imageName = "fu"
+            points = -500
+        } else if randomChance < 0.15 {
+            itemType = "ant"
+            imageName = "ant"
+            points = -100
+        } else if randomChance < 0.20 {
+            itemType = "brown"
+            imageName = "brown sugar"
+            points = 100
+        } else {
+            itemType = "normal"
+            imageName = "sugar"
+            points = 50
+        }
         
         let newSugar = Sugar(
             x: randomX,
             y: 0,
-            type: sugarType,
+            type: itemType,
+            imageName: imageName,
             points: points
         )
         
@@ -161,7 +183,7 @@ struct CatchingSugarView: View {
         
         let missedSugars = sugars.filter { $0.y >= 700 }
         for _ in missedSugars {
-            score = max(0, score - 15)
+            score = max(0, score - 10)
         }
         
         sugars = sugars.filter { $0.y < 700 }
@@ -211,6 +233,7 @@ struct Sugar: Identifiable {
     var x: Double
     var y: Double
     let type: String
+    let imageName: String
     let points: Int
 }
 
