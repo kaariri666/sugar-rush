@@ -11,18 +11,18 @@ class GameData: ObservableObject {
 }
 
 struct Home_page: View {
-    @StateObject var gameData = GameData()
+    @EnvironmentObject var gameData: GameData  // Changed from @StateObject to @EnvironmentObject
     @State var showTutorial = false
+    
     var body: some View {
         NavigationStack {
-            VStack{
-                HStack{
+            VStack {
+                HStack {
                     Spacer()
-                    Button{
+                    Button {
                         showTutorial = true
-                    }label:{
+                    } label: {
                         Text("tutorial")
-                        
                     }
                     .buttonStyle(.borderedProminent)
                     Spacer()
@@ -30,12 +30,11 @@ struct Home_page: View {
                     NavigationLink {
                         Minigames_()
                             .environmentObject(gameData)
-                    } label:{
+                    } label: {
                         HStack {
                             Spacer()
                             Text("Minigames")
                             Spacer()
-                            
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -53,14 +52,14 @@ struct Home_page: View {
                     .frame(width: 400, height: 400)
                     .navigationTitle(Text("Sugar Rush"))
             }
-            
-            .sheet(isPresented: $showTutorial){
+            .sheet(isPresented: $showTutorial) {
                 tutorialview()
             }
         }
     }
 }
+
 #Preview {
     Home_page()
+        .environmentObject(GameData())
 }
-

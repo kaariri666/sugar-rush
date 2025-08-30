@@ -8,10 +8,14 @@
 import SwiftUI
 
 @main
-struct sugar_rushApp: App {
+struct YourApp: App {
+    @StateObject private var gameData = GameData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Home_page()
+                .environmentObject(gameData)
         }
     }
 }
+
