@@ -82,5 +82,6 @@ struct Minigames_: View {
 }
 #Preview {
     Minigames_()
+        .environmentObject(GameData())
 }
 
