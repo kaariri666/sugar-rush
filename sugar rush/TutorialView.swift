@@ -12,7 +12,7 @@ struct tutorialview: View {
         VStack {
             Text("__Tutorial:__")
                 .font(.title)
-            Text("so u see that ugly guy at the bottom of the screen? wannna kil-hem remove him? us too! so this is an opportunity to get as much coca-...i mean sugar as u can and shove it into him until he explodes! hoe fun :D")
+            Text("so u see that ugly guy at the bottom of the screen? wannna kill him? us too! so this is an opportunity to get as much sugar as u can and shove it into him until he explodes! how fun :D")
                 .padding()
                 Spacer()
             
