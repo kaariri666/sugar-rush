@@ -44,12 +44,15 @@ struct Home_page: View {
                 
                 Text("__Amount of Sugar__")
                     .font(.largeTitle)
+                    .position(x: 200, y: 50)
+                
                 Text("Score: \(gameData.score)")
+                    .position(x: 200, y: 70)
                 
                 Spacer()
-                Image("uglyguy")
+                Image("kmy")
                     .resizable()
-                    .frame(width: 400, height: 400)
+                    .frame(width: 600, height: 600)
                     .navigationTitle(Text("Sugar Rush"))
             }
             .sheet(isPresented: $showTutorial) {
