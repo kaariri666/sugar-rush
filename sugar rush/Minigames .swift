@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct Minigames_: View {
+    @EnvironmentObject var gameData: GameData
     @State private var showingCatchingSugar = false
     @State private var showingCollectingSugar = false
     @State private var showingShootingSugar = false
@@ -30,6 +31,7 @@ struct Minigames_: View {
             .padding()
                 .fullScreenCover(isPresented: $showingCatchingSugar) {
                     CatchingSugarView()
+                        .environmentObject(gameData)
                 }
             
             Button{
@@ -43,6 +45,7 @@ struct Minigames_: View {
             .padding()
                 .fullScreenCover(isPresented: $showingShootingSugar) {
                     ShootingSugar()
+                        .environmentObject(gameData)
                 }
             
             Button{
@@ -56,6 +59,7 @@ struct Minigames_: View {
             .padding()
             .fullScreenCover(isPresented: $showingCollectingSugar) {
                     collectingSugar()
+                    .environmentObject(gameData)
                 }
             
             Button{
@@ -70,6 +74,7 @@ struct Minigames_: View {
             Spacer()
                 .fullScreenCover(isPresented: $showingLuckyDraw) {
                     LuckyDrawView()
+                        .environmentObject(gameData)
                 }
             
         }

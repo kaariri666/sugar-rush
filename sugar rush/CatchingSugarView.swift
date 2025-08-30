@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CatchingSugarView: View {
-    @State var score = 0
+    @EnvironmentObject var gameData: GameData
     @State var timeLeft = 120
     @State var gameOver = false
     @State var basketX = 200.0
@@ -27,7 +27,7 @@ struct CatchingSugarView: View {
                     .font(.largeTitle)
                     .padding()
                 
-                Text("ur score was \(score)g")
+                Text("ur score was \(gameData.score)g")
                     .font(.title2)
                     .padding()
                 
@@ -44,7 +44,7 @@ struct CatchingSugarView: View {
                 
                 VStack {
                     HStack {
-                        Text("SCORE: \(score)g")
+                        Text("SCORE: \(gameData.score)g")
                             .font(.headline)
                         Spacer()
                         Text("Timer: \(timeLeft)s")
@@ -183,7 +183,7 @@ struct CatchingSugarView: View {
         
         let missedSugars = sugars.filter { $0.y >= 700 }
         for _ in missedSugars {
-            score = max(0, score - 10)
+            gameData.score = max(0, gameData.score - 10)
         }
         
         sugars = sugars.filter { $0.y < 700 }
@@ -193,7 +193,7 @@ struct CatchingSugarView: View {
         for sugar in sugars {
             if sugar.y > 600 && sugar.y < 680 {
                 if sugar.x > basketX - 40 && sugar.x < basketX + 40 {
-                    score += sugar.points
+                    gameData.score += sugar.points
                     if let index = sugars.firstIndex(where: { $0.id == sugar.id }) {
                         sugars.remove(at: index)
                     }

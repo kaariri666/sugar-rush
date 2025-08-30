@@ -29,6 +29,7 @@ struct Home_page: View {
                     
                     NavigationLink {
                         Minigames_()
+                            .environmentObject(gameData)
                     } label:{
                         HStack {
                             Spacer()
