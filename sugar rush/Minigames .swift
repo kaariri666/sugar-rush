@@ -7,7 +7,11 @@
 import SwiftUI
 
 struct Minigames_: View {
-    @State private var showingFullScreen = false
+    @State private var showingCatchingSugar = false
+    @State private var showingCollectingSugar = false
+    @State private var showingShootingSugar = false
+    @State private var showingLuckyDraw = false
+    
     var body: some View {
         VStack{
             Text("__Minigames__")
@@ -16,7 +20,7 @@ struct Minigames_: View {
             
             
             Button{
-                showingFullScreen = true
+                showingCatchingSugar = true
             }label:{
                 Text("__Catching Sugar__             ")
             }
@@ -24,12 +28,12 @@ struct Minigames_: View {
             .font(.largeTitle)
             .tint(.purple)
             .padding()
-                .fullScreenCover(isPresented: $showingFullScreen) {
+                .fullScreenCover(isPresented: $showingCatchingSugar) {
                     CatchingSugarView()
                 }
             
             Button{
-                showingFullScreen = true
+                showingShootingSugar = true
             }label:{
                 Text("__Shooting Sugar__             ")
             }
@@ -37,12 +41,12 @@ struct Minigames_: View {
             .font(.largeTitle)
             .tint(.blue)
             .padding()
-                .fullScreenCover(isPresented: $showingFullScreen) {
+                .fullScreenCover(isPresented: $showingShootingSugar) {
                     ShootingSugar()
                 }
             
             Button{
-                showingFullScreen = true
+                showingCollectingSugar = true
             }label:{
                 Text("__Collecting Sugar__            ")
             }
@@ -50,21 +54,21 @@ struct Minigames_: View {
             .font(.largeTitle)
             .tint(.teal)
             .padding()
-                .fullScreenCover(isPresented: $showingFullScreen) {
+            .fullScreenCover(isPresented: $showingCollectingSugar) {
                     collectingSugar()
                 }
             
             Button{
-                showingFullScreen = true
+                showingLuckyDraw = true
             }label:{
-                Text("__Catching Sugar__              ")
+                Text("__Lucky Draw__                      ")
             }
             .buttonStyle(.borderedProminent)
             .font(.largeTitle)
             .tint(.green)
             .padding()
             Spacer()
-                .fullScreenCover(isPresented: $showingFullScreen) {
+                .fullScreenCover(isPresented: $showingLuckyDraw) {
                     LuckyDrawView()
                 }
             
