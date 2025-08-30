@@ -11,7 +11,7 @@ class GameData: ObservableObject {
 }
 
 struct Home_page: View {
-    @EnvironmentObject var gameData: GameData  // Changed from @StateObject to @EnvironmentObject
+    @EnvironmentObject var gameData: GameData  
     @State var showTutorial = false
     
     var body: some View {
