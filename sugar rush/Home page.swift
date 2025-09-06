@@ -43,7 +43,10 @@ struct Home_page: View {
                     Spacer()
                 }
                 
-                Spacer()
+                Image("kmyyay")
+                    .resizable()
+                    .frame(width: 300, height: 300)
+                    .position(x: 200, y: 130)
                 
                 Text("Amount of Sugar")
                     .font(.title2)
@@ -53,7 +56,7 @@ struct Home_page: View {
                             .fill(Color.teal)
                     )
                     .foregroundColor(.white)
-                    .position(x: 300, y: 275)
+                    .position(x: 300, y: 120)
 
                 
                 Spacer()
@@ -62,17 +65,17 @@ struct Home_page: View {
                     Image("kmy")
                         .resizable()
                         .frame(width: 300, height: 500)
-                        .position(x: 110, y: 60)
+                        .position(x: 110, y: -10)
                     
                     Image("jar")
                         .resizable()
                         .frame(width: 200, height: 300)
-                        .position(x: 300, y: 120)
+                        .position(x: 300, y: 70)
                     
                     Text("Score: \(gameData.score)")
                         .font(.title)
                         .foregroundColor(.black)
-                        .position(x: 300, y: 140)
+                        .position(x: 300, y: 90)
                 }
                 
                 Spacer()
