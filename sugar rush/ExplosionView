@@ -1,0 +1,26 @@
+
+import SwiftUI
+
+struct ExplosionView: View {
+    @State private var animate = false
+    
+    var body: some View {
+        ZStack {
+            ForEach(0..<20, id: \.self) { i in
+                Circle()
+                    .fill(Color.red)
+                    .frame(width: 10, height: 10)
+                    .offset(y: animate ? CGFloat.random(in: -150...150) : 0)
+                    .rotationEffect(.degrees(animate ? 360 : 0))
+                    .opacity(animate ? 0 : 1)
+                    .animation(
+                        .easeOut(duration: 1).delay(Double(i) * 0.02),
+                        value: animate
+                    )
+            }
+        }
+        .onAppear {
+            animate = true
+        }
+    }
+}
