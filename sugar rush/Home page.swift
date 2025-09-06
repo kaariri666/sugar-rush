@@ -45,11 +45,15 @@ struct Home_page: View {
                 
                 Spacer()
                 
-                Text("_Amount of Sugar_")
-                    .clipShape(.rect(cornerRadius: 10))
-                    .backgroundStyle(.red)
-                    .position(x: 300, y: 285)
+                Text("Amount of Sugar")
                     .font(.title2)
+                    .padding(8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.teal)
+                    )
+                    .foregroundColor(.white)
+                    .position(x: 300, y: 275)
 
                 
                 Spacer()
