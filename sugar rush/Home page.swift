@@ -11,7 +11,7 @@ class GameData: ObservableObject {
 }
 
 struct Home_page: View {
-    @EnvironmentObject var gameData: GameData  
+    @EnvironmentObject var gameData: GameData
     @State var showTutorial = false
     
     var body: some View {
@@ -25,6 +25,7 @@ struct Home_page: View {
                         Text("tutorial")
                     }
                     .buttonStyle(.borderedProminent)
+                    
                     Spacer()
                     
                     NavigationLink {
@@ -38,23 +39,41 @@ struct Home_page: View {
                         }
                     }
                     .buttonStyle(.borderedProminent)
+                    
                     Spacer()
                 }
-                Spacer()
-                
-                Text("__Amount of Sugar__")
-                    .font(.largeTitle)
-                    .position(x: 200, y: 50)
-                
-                Text("Score: \(gameData.score)")
-                    .position(x: 200, y: 70)
                 
                 Spacer()
-                Image("kmy")
-                    .resizable()
-                    .frame(width: 600, height: 600)
-                    .navigationTitle(Text("Sugar Rush"))
+                
+                Text("_Amount of Sugar_")
+                    .clipShape(.rect(cornerRadius: 10))
+                    .backgroundStyle(.red)
+                    .position(x: 300, y: 285)
+                    .font(.title2)
+
+                
+                Spacer()
+                
+                ZStack {
+                    Image("kmy")
+                        .resizable()
+                        .frame(width: 300, height: 500)
+                        .position(x: 110, y: 60)
+                    
+                    Image("jar")
+                        .resizable()
+                        .frame(width: 200, height: 300)
+                        .position(x: 300, y: 120)
+                    
+                    Text("Score: \(gameData.score)")
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .position(x: 300, y: 140) //
+                }
+                
+                Spacer()
             }
+            .navigationTitle(Text("Sugar Rush"))
             .sheet(isPresented: $showTutorial) {
                 tutorialview()
             }
