@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LuckyDrawView: View {
+    @EnvironmentObject var gameData: GameData
+    @Environment(\.dismiss) private var dismiss
     @State var rotation = 0.0
     @State var isSpinning = false
     @State var winner = ""
@@ -19,6 +21,23 @@ struct LuckyDrawView: View {
     var body: some View {
         
         VStack {
+            
+            // Back button at top left
+            HStack {
+                Button(action: {
+                    dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                    }
+                    .foregroundColor(.blue)
+                }
+                .padding(.leading)
+                
+                Spacer()
+            }
+            .padding(.top)
             
             Text("spin it")
                 .font(.title)
@@ -111,6 +130,12 @@ struct LuckyDrawView: View {
             isSpinning = false
             let winnerIndex = Int((rotation.truncatingRemainder(dividingBy: 360)) / 90)
             winner = prizes[3 - winnerIndex]
+            
+            // Add score if winner is sugar
+            if winner == "sugar" {
+                gameData.score += 100
+            }
+            
             showPopup = true
         }
     }
@@ -152,4 +177,5 @@ struct Triangle: Shape {
 
 #Preview {
     LuckyDrawView()
+        .environmentObject(GameData())
 }

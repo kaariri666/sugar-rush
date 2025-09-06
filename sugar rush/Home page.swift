@@ -72,7 +72,7 @@ struct Home_page: View {
                     Text("Score: \(gameData.score)")
                         .font(.title)
                         .foregroundColor(.black)
-                        .position(x: 300, y: 140) //
+                        .position(x: 300, y: 140)
                 }
                 
                 Spacer()
