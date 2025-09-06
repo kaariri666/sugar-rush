@@ -17,6 +17,7 @@ struct Home_page: View {
     var body: some View {
         NavigationStack {
             VStack {
+                
                 HStack {
                     Spacer()
                     Button {
@@ -80,6 +81,7 @@ struct Home_page: View {
                 
                 Spacer()
             }
+            .background(Color.purple.opacity(0.2))
             .navigationTitle(Text("Sugar Rush"))
             .sheet(isPresented: $showTutorial) {
                 tutorialview()

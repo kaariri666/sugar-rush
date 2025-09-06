@@ -16,7 +16,7 @@ struct CatchingSugarView: View {
     @State var sugars: [Sugar] = []
     @State var movingDirection = ""
     @State var moveTimer: Timer?
-    @State var gameScore = 0  // Separate game score that resets each game
+    @State var gameScore = 0
 
     var body: some View {
         if gameOver {
@@ -63,7 +63,7 @@ struct CatchingSugarView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    // Back button at top left
+                    
                     HStack {
                         Button(action: {
                             dismiss()
@@ -164,7 +164,7 @@ struct CatchingSugarView: View {
     }
     
     func startGame() {
-        // Reset game score to 0 when starting a new game
+        
         gameScore = 0
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -172,7 +172,7 @@ struct CatchingSugarView: View {
                 timeLeft -= 1
             } else {
                 gameOver = true
-                // Add the game score to the main score when game ends
+                
                 gameData.score += gameScore
                 timer.invalidate()
             }
@@ -240,7 +240,7 @@ struct CatchingSugarView: View {
         
         let missedSugars = sugars.filter { $0.y >= 700 }
         for _ in missedSugars {
-            gameScore = max(0, gameScore - 10)  // Use gameScore instead of gameData.score
+            gameScore = max(0, gameScore - 10)
         }
         
         sugars = sugars.filter { $0.y < 700 }
@@ -250,7 +250,7 @@ struct CatchingSugarView: View {
         for sugar in sugars {
             if sugar.y > 600 && sugar.y < 680 {
                 if sugar.x > basketX - 40 && sugar.x < basketX + 40 {
-                    gameScore += sugar.points  // Use gameScore instead of gameData.score
+                    gameScore += sugar.points
                     if let index = sugars.firstIndex(where: { $0.id == sugar.id }) {
                         sugars.remove(at: index)
                     }
