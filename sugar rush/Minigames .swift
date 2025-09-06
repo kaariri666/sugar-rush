@@ -29,10 +29,10 @@ struct Minigames_: View {
             .font(.largeTitle)
             .tint(.purple)
             .padding()
-                .fullScreenCover(isPresented: $showingCatchingSugar) {
-                    CatchingSugarView()
-                        .environmentObject(gameData)
-                }
+            .fullScreenCover(isPresented: $showingCatchingSugar) {
+                CatchingSugarView()
+                    .environmentObject(gameData)
+            }
             
             Button{
                 showingShootingSugar = true
@@ -43,10 +43,10 @@ struct Minigames_: View {
             .font(.largeTitle)
             .tint(.blue)
             .padding()
-                .fullScreenCover(isPresented: $showingShootingSugar) {
-                    ShootingSugar()
-                        .environmentObject(gameData)
-                }
+            .fullScreenCover(isPresented: $showingShootingSugar) {
+                ShootingSugar()
+                    .environmentObject(gameData)
+            }
             
             Button{
                 showingCollectingSugar = true
@@ -58,30 +58,30 @@ struct Minigames_: View {
             .tint(.teal)
             .padding()
             .fullScreenCover(isPresented: $showingCollectingSugar) {
-                    collectingSugar()
+                CollectingSugarView()
                     .environmentObject(gameData)
-                }
-            
-            Button{
-                showingLuckyDraw = true
-            }label:{
-                Text("__Lucky Draw__                      ")
             }
-            .buttonStyle(.borderedProminent)
-            .font(.largeTitle)
-            .tint(.green)
-            .padding()
-            Spacer()
-                .fullScreenCover(isPresented: $showingLuckyDraw) {
-                    LuckyDrawView()
-                        .environmentObject(gameData)
+                
+                Button{
+                    showingLuckyDraw = true
+                }label:{
+                    Text("__Lucky Draw__                      ")
                 }
-            
+                .buttonStyle(.borderedProminent)
+                .font(.largeTitle)
+                .tint(.green)
+                .padding()
+                Spacer()
+                    .fullScreenCover(isPresented: $showingLuckyDraw) {
+                        LuckyDrawView()
+                            .environmentObject(gameData)
+                    }
+                
+            }
         }
     }
-}
-#Preview {
-    Minigames_()
-        .environmentObject(GameData())
-}
-
+    #Preview {
+        Minigames_()
+            .environmentObject(GameData())
+    }
+    
