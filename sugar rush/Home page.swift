@@ -4,6 +4,7 @@
 //
 //  Created by Julia Li on 16/8/25.
 //
+
 import SwiftUI
 
 class GameData: ObservableObject {
@@ -165,28 +166,25 @@ struct Home_page: View {
                     }
                     .padding(.horizontal)
                     
-                    // Explosion overlay
                     if showExplosion {
                         ExplosionView()
                             .frame(width: 400, height: 400)
                     }
                     
-                    // Confetti overlay
                     if showExplosion {
                         ConfettiView()
                             .frame(width: 400, height: 600)
                     }
                     
-                    // Explosion message
                     if gameData.hasExploded && showExplosion {
                         VStack {
-                            Text("💥 KMY EXPLODED! 💥")
+                            Text("yay u exploded kmy")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundColor(.red)
                                 .shadow(color: .black, radius: 2)
                             
-                            Text("Sugar overload at 5040g!")
+                            Text("she ate at least 5040g of sugar")
                                 .font(.title2)
                                 .foregroundColor(.orange)
                                 .fontWeight(.semibold)
@@ -220,17 +218,16 @@ struct Home_page: View {
     }
     
     private func triggerExplosion() {
-        // Wait 2 seconds to show the "target reached" message first
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             showExplosion = true
-            
-            // Animate kmy explosion
+
             withAnimation(.easeInOut(duration: 0.2)) {
                 kmyScale = 1.5
                 kmyRotation = 360
             }
             
-            // Make kmy disappear
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     kmyScale = 0.1
@@ -238,20 +235,20 @@ struct Home_page: View {
                 }
             }
             
-            // Reset everything and bring back new kmy
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 showExplosion = false
                 
-                // Reset game data
+
                 gameData.score = 0
                 gameData.hasExploded = false
                 
-                // Reset kmy appearance for the "new" one
+
                 kmyScale = 1.0
                 kmyRotation = 0
                 kmyOpacity = 1.0
                 
-                // Optional: Add a little "spawn" animation for the new kmy
+
                 withAnimation(.easeInOut(duration: 0.5)) {
                     kmyScale = 1.0
                 }
