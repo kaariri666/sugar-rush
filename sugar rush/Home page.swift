@@ -12,7 +12,7 @@ class GameData: ObservableObject {
     @Published var hasExploded: Bool = false
     
     func checkForExplosion() {
-        if score >= 5040 && !hasExploded {
+        if score >= 100 && !hasExploded {
             hasExploded = true
         }
     }
@@ -75,7 +75,7 @@ struct ExplosionView: View {
         for i in 0..<particles.count {
             particles[i].x += particles[i].velocityX * 0.02
             particles[i].y += particles[i].velocityY * 0.02
-            particles[i].velocityY += 200 * 0.02 // gravity
+            particles[i].velocityY += 200 * 0.02
             particles[i].opacity -= 0.01
             particles[i].scale *= 0.99
         }
@@ -139,32 +139,27 @@ struct Home_page: View {
                 Spacer()
                 
                 ZStack {
-                    HStack {
-                        Image("kmy")
-                            .resizable()
-                            .frame(width: 300, height: 500)
-                            .scaleEffect(kmyScale)
-                            .rotationEffect(.degrees(kmyRotation))
-                            .opacity(kmyOpacity)
-                            .animation(.easeInOut(duration: 0.5), value: kmyScale)
-                            .animation(.easeInOut(duration: 0.3), value: kmyRotation)
-                            .animation(.easeInOut(duration: 0.3), value: kmyOpacity)
-                        
-                        Spacer()
-                        
-                        VStack {
-                            Image("jar")
-                                .resizable()
-                                .frame(width: 200, height: 300)
-                            
-                            Text("Score: \(gameData.score)g")
-                                .font(.title)
-                                .foregroundColor(gameData.score >= 5040 ? .red : .black)
-                                .fontWeight(gameData.score >= 5040 ? .bold : .regular)
-                                .padding(.top, 10)
-                        }
-                    }
-                    .padding(.horizontal)
+                    Image("kmy")
+                        .resizable()
+                        .frame(width: 300, height: 500)
+                        .scaleEffect(kmyScale)
+                        .rotationEffect(.degrees(kmyRotation))
+                        .opacity(kmyOpacity)
+                        .position(x: 110, y: -10)
+                        .animation(.easeInOut(duration: 0.5), value: kmyScale)
+                        .animation(.easeInOut(duration: 0.3), value: kmyRotation)
+                        .animation(.easeInOut(duration: 0.3), value: kmyOpacity)
+                    
+                    Image("jar")
+                        .resizable()
+                        .frame(width: 200, height: 300)
+                        .position(x: 300, y: 70)
+                    
+                    Text("Score: \(gameData.score)g")
+                        .font(.title)
+                        .foregroundColor(gameData.score >= 5040 ? .red : .black)
+                        .fontWeight(gameData.score >= 5040 ? .bold : .regular)
+                        .position(x: 300, y: 90)
                     
                     if showExplosion {
                         ExplosionView()
@@ -173,12 +168,12 @@ struct Home_page: View {
                     
                     if showExplosion {
                         ConfettiView()
-                            .frame(width: 400, height: 600)
+                            .frame(width: 0, height: 0)
                     }
                     
                     if gameData.hasExploded && showExplosion {
                         VStack {
-                            Text("yay u exploded kmy")
+                            Text("yay you exploded kmy")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundColor(.red)
@@ -189,7 +184,7 @@ struct Home_page: View {
                                 .foregroundColor(.orange)
                                 .fontWeight(.semibold)
                             
-                            Text("A new Kmy appears...")
+                            Text("a new Kmy appeared!")
                                 .font(.title3)
                                 .foregroundColor(.green)
                                 .fontWeight(.medium)
@@ -218,15 +213,13 @@ struct Home_page: View {
     }
     
     private func triggerExplosion() {
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             showExplosion = true
-
+            
             withAnimation(.easeInOut(duration: 0.2)) {
                 kmyScale = 1.5
                 kmyRotation = 360
             }
-            
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation(.easeInOut(duration: 0.3)) {
@@ -234,20 +227,16 @@ struct Home_page: View {
                     kmyOpacity = 0
                 }
             }
-            
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 showExplosion = false
-                
 
                 gameData.score = 0
                 gameData.hasExploded = false
-                
 
                 kmyScale = 1.0
                 kmyRotation = 0
                 kmyOpacity = 1.0
-                
 
                 withAnimation(.easeInOut(duration: 0.5)) {
                     kmyScale = 1.0
@@ -256,8 +245,6 @@ struct Home_page: View {
         }
     }
 }
-
-
 
 #Preview {
     Home_page()
