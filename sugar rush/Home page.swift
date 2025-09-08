@@ -160,45 +160,20 @@ struct Home_page: View {
                         .foregroundColor(gameData.score >= 5040 ? .red : .black)
                         .fontWeight(gameData.score >= 5040 ? .bold : .regular)
                         .position(x: 300, y: 90)
-                    
-                    if showExplosion {
-                        ExplosionView()
-                            .frame(width: 400, height: 400)
-                    }
-                    
-                    if showExplosion {
-                        ConfettiView()
-                            .frame(width: 0, height: 0)
-                    }
-                    
-                    if gameData.hasExploded && showExplosion {
-                        VStack {
-                            Text("yay you exploded kmy")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-                                .foregroundColor(.red)
-                                .shadow(color: .black, radius: 2)
-                            
-                            Text("she ate at least 5040g of sugar")
-                                .font(.title2)
-                                .foregroundColor(.orange)
-                                .fontWeight(.semibold)
-                            
-                            Text("a new Kmy appeared!")
-                                .font(.title3)
-                                .foregroundColor(.green)
-                                .fontWeight(.medium)
-                                .padding(.top, 10)
-                        }
-                        .position(x: 200, y: 200)
-                        .zIndex(10)
-                    }
                 }
                 
                 Spacer()
             }
             .background(Color.purple.opacity(0.2))
             .navigationTitle(Text("Sugar Rush"))
+            .overlay(
+                Group {
+                    if showExplosion {
+                        ConfettiView()
+                            .allowsHitTesting(false)
+                    }
+                }
+            )
             .sheet(isPresented: $showTutorial) {
                 tutorialview()
             }

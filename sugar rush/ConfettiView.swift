@@ -46,7 +46,7 @@ struct ConfettiView: View {
         for _ in 0..<80 {
             let piece = ConfettiPiece(
                 x: 110,
-                y: 200,
+                y: 240,
                 velocityX: CGFloat.random(in: -300...300),
                 velocityY: CGFloat.random(in: -400...100),
                 color: colors.randomElement() ?? .red,
