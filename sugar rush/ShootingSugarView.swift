@@ -37,6 +37,7 @@ private struct Bullet: Identifiable {
 
 struct ShootingSugar: View {
     @EnvironmentObject var gameData: GameData
+    @Environment(\.dismiss) private var dismiss
     
     @State private var isGameActive: Bool = false
     @State private var timeRemaining: Int = 50
@@ -73,13 +74,28 @@ struct ShootingSugar: View {
 
 private extension ShootingSugar {
     var header: some View {
-        HStack {
-            Text("Score: \(gameScore)")
-            Spacer()
-            Text("Time: \(timeRemaining)s")
-                .foregroundColor(timeRemaining <= 10 ? .red : .primary)
+        VStack {
+            HStack {
+                Button(action: { dismiss() }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                    }
+                    .foregroundColor(.blue)
+                }
+                .padding(.leading)
+                Spacer()
+            }
+            .padding(.top)
+            
+            HStack {
+                Text("Score: \(gameScore)")
+                Spacer()
+                Text("Time: \(timeRemaining)s")
+                    .foregroundColor(timeRemaining <= 10 ? .red : .primary)
+            }
+            .padding()
         }
-        .padding()
     }
     
     var playArea: some View {
