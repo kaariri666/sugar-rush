@@ -143,7 +143,8 @@ struct CollectingSugarView: View {
                 }
                 .padding(.bottom)
             }
-            .navigationTitle("Collecting Sugar")
+            .navigationBarHidden(true)
+            .background(Color(red: 0.6, green: 0.75, blue: 0.85).ignoresSafeArea())
             .overlay(
                 Group {
                     if showGameOver {

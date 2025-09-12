@@ -66,7 +66,8 @@ struct ShootingSugar: View {
                 playArea
                 controls
             }
-            .navigationTitle("Shooting Sugar")
+            .navigationBarHidden(true)
+            .background(Color(red: 0.7, green: 0.9, blue: 0.7))
             .overlay(gameOverOverlay)
         }
     }

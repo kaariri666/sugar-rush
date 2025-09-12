@@ -4,6 +4,7 @@
 //
 //  Created by Julia Li on 16/8/25.
 //
+
 import SwiftUI
 
 struct Minigames_: View {
@@ -78,10 +79,11 @@ struct Minigames_: View {
                     }
                 
             }
+        .background(Color(red: 0.9, green: 0.88, blue: 0.95).ignoresSafeArea())
         }
     }
-    #Preview {
-        Minigames_()
-            .environmentObject(GameData())
-    }
-    
+
+#Preview {
+    Minigames_()
+        .environmentObject(GameData())
+}
