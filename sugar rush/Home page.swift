@@ -12,7 +12,7 @@ class GameData: ObservableObject {
     @Published var hasExploded: Bool = false
     
     func checkForExplosion() {
-        if score >= 5040 && !hasExploded {
+        if score >= 10 && !hasExploded {
             hasExploded = true
         }
     }

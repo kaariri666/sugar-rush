@@ -4,7 +4,6 @@
 //
 //  Created by Julia Li on 16/8/25.
 //
-
 import SwiftUI
 
 private enum SugarType: CaseIterable {
@@ -26,7 +25,6 @@ private struct SugarTarget: Identifiable {
     var position: CGPoint
     var speed: CGFloat
     let type: SugarType
-    let scoop: Scoop
 }
 
 private struct Bullet: Identifiable {
@@ -57,7 +55,7 @@ struct ShootingSugar: View {
     private let gunBarrelSize: CGSize = .init(width: 8, height: 34)
     private let gunBaseSize: CGSize = .init(width: 90, height: 28)
     private let bulletSize: CGSize = .init(width: 10, height: 18)
-    private let targetSize: CGFloat = 36
+    private let targetSize: CGFloat = 150
     
     var body: some View {
         NavigationView {
@@ -112,8 +110,11 @@ private extension ShootingSugar {
                         }
                 )
             
+            // Targets now use "kmy" image
             ForEach(targets) { target in
-                ScoopView(scoop: target.scoop)
+                Image("kmy")
+                    .resizable()
+                    .scaledToFit()
                     .frame(width: targetSize, height: targetSize)
                     .position(target.position)
             }
@@ -230,7 +231,7 @@ private extension ShootingSugar {
         let type = SugarType.allCases.randomElement() ?? .normal
         let x = CGFloat.random(in: targetSize...(playAreaWidth - targetSize))
         let speed = CGFloat.random(in: 1.6...2.6)
-        targets.append(SugarTarget(position: CGPoint(x: x, y: 0), speed: speed, type: type, scoop: Scoop.random()))
+        targets.append(SugarTarget(position: CGPoint(x: x, y: 0), speed: speed, type: type))
     }
     
     func shoot() {
